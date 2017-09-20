@@ -13,6 +13,7 @@ page-departure-tabs {
     .tabbar.show-tabbar {
         height: 56px;
         font-size: 100%;
+        box-shadow: 0 0 0.3px 0 rgba(0, 0, 0, 0.04), 0 0 1px 0 rgba(0, 0, 0, 0.01);
         background-color: transparent !important;
     }
     .tabbar,
@@ -24,9 +25,6 @@ page-departure-tabs {
             width: 25px;
             margin-bottom: 5px;
             margin-top: 5px;
-            &:before {
-                display: none;
-            }
         }
     }
     .tabs-ios .tabbar {
@@ -42,32 +40,10 @@ page-departure-tabs {
             width: 32px;
             margin-bottom: 2px;
             margin-top: 1px;
-            &:before {
-                display: none;
-            }
         }
     }
-    .tabs-ios .tab-button[aria-selected=true] {
-        border-top-style: solid;
-        border-top-width: 6px;
-        width: 5px;
-        border-image: linear-gradient(to right, #3fe3fe 0%, #56b9e0 100%);
-        border-image-slice: 1;
-    }
-    .tabs-md .tab-button[aria-selected=true] {
-        border-top-style: solid;
-        border-top-width: 6px;
-        width: 5px;
-        border-image: linear-gradient(to right, #3fe3fe 0%, #56b9e0 100%);
-        border-image-slice: 1;
-        // border-radius: 100px;
-    }
-    .tabs-md .tab-button {
-        margin: 18px;
-    }
-    .tabs-ios .tab-button {
-        margin: 20px;
-    }
+    // .footer-ios::before,
+    // .tabs-ios[tabsPlacement="bottom"]>.tabbar::before {}
     /*icon customize*/
     /* .ion-ios-day-outline,*/
     /* .ion-ios-day,.ion-md-day,.ion-md-day-outline {*/
@@ -104,20 +80,14 @@ page-departure-tabs {
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="horoscope"],
-            .tab-button-icon[aria-label*="horoscope"] {
-                background-image: url(../assets/departure/btn_horoscope_off.png);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
             .tab-button-icon[ng-reflect-name*="exchange"],
             .tab-button-icon[aria-label*="exchange"] {
                 background-image: url(../assets/departure/icon/icon_switch_1.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="more"],
-            .tab-button-icon[aria-label*="more"] {
+            .tab-button-icon[ng-reflect-name*="mores"],
+            .tab-button-icon[aria-label*="mores"] {
                 background-image: url(../assets/departure/icon/icon_more_1.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
@@ -141,20 +111,14 @@ page-departure-tabs {
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="horoscope"],
-            .tab-button-icon[aria-label*="horoscope"] {
-                background-image: url(../assets/departure/btn_horoscope_on.png);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
             .tab-button-icon[ng-reflect-name*="exchange"],
             .tab-button-icon[aria-label*="exchange"] {
                 background-image: url(../assets/departure/icon/icon_switch_2.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="more"],
-            .tab-button-icon[aria-label*="more"] {
+            .tab-button-icon[ng-reflect-name*="mores"],
+            .tab-button-icon[aria-label*="mores"] {
                 background-image: url(../assets/departure/icon/icon_more_2.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
@@ -182,20 +146,14 @@ page-departure-tabs {
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="horoscope"],
-            .tab-button-icon[aria-label*="horoscope outline"] {
-                background-image: url(../assets/departure/btn_horoscope_off.png);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
             .tab-button-icon[ng-reflect-name*="exchange"],
             .tab-button-icon[aria-label*="exchange"] {
                 background-image: url(../assets/departure/icon/icon_switch_1.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="more"],
-            .tab-button-icon[aria-label*="more"] {
+            .tab-button-icon[ng-reflect-name*="mores"],
+            .tab-button-icon[aria-label*="mores"] {
                 background-image: url(../assets/departure/icon/icon_more_1.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
@@ -219,20 +177,14 @@ page-departure-tabs {
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="horoscope"],
-            .tab-button-icon[aria-label*="horoscope"] {
-                background-image: url(../assets/departure/btn_horoscope_on.png);
-                background-size: 100% 100%;
-                background-repeat: no-repeat;
-            }
             .tab-button-icon[ng-reflect-name*="exchange"],
             .tab-button-icon[aria-label*="exchange"] {
                 background-image: url(../assets/departure/icon/icon_switch_2.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
             }
-            .tab-button-icon[ng-reflect-name*="more"],
-            .tab-button-icon[aria-label*="more"] {
+            .tab-button-icon[ng-reflect-name*="mores"],
+            .tab-button-icon[aria-label*="mores"] {
                 background-image: url(../assets/departure/icon/icon_more_2.png);
                 background-size: 100% 100%;
                 background-repeat: no-repeat;
@@ -244,5 +196,15 @@ page-departure-tabs {
                 font-weight: 400;
             }
         }
+    }
+    .divBar {
+        width: 40px;
+        height: 6px;
+        background-color: #4bcdef;
+        border-radius: 3px;
+        position: absolute;
+        left: 20px;
+        transform: translateX(0px, -4px);
+        transition: 200ms;
     }
 }

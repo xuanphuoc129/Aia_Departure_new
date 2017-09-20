@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, Platform } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
 import { AppController } from '../../providers/app-controller';
 import { DepartureModule } from '../../providers/departure/departure';
@@ -53,15 +53,19 @@ export class DepartureHomePage {
   //góc quay cho div ở phần ngày dương
   degree: number = 0;
 
-
+  //loading 
+  isLoading : boolean = true;
+  isPlatform;
   /* init all variable */
   constructor(
     private navCtrl: NavController,
     private mDepartureModule: DepartureModule,
     private mMenuController: MenuController,
-    private datePicker: DatePicker
+    private datePicker: DatePicker,
+    private platform : Platform
   ) {
-
+    this.isPlatform = this.platform._platforms[2];
+    console.log(this.isPlatform);
     this.solarDate = new Date().getDate();
     this.solarMonth = new Date().getMonth() + 1;
     this.solarYear = new Date().getFullYear();
@@ -95,10 +99,9 @@ export class DepartureHomePage {
     this.getSexagesimalCycle();
     this.getQuoteAndDayName();
     this.changeBackgroundImage();
-    setInterval(() => {
-      this.nowtime = new Date();
-      this.sexagesimalCycleTime = this.mDepartureModule.getSexagesimalCycleByTime(this.solarDate, this.solarMonth, this.solarYear, this.nowtime.getHours());
-    }, 1000);
+    this.nowtime = new Date();
+    this.sexagesimalCycleTime = this.mDepartureModule.getSexagesimalCycleByTime(this.solarDate, this.solarMonth, this.solarYear, this.nowtime.getHours());
+    this.isLoading = false;
   }
   onClickHome() {
     //this.events.publish("HOME_PAGE");
@@ -271,9 +274,6 @@ export class DepartureHomePage {
         qoute_fg.style.color = link.fg;
         departure_background.style.backgroundImage = 'url(' + link.bg + ')';
       } 
-      // else {
-      //   element.style.backgroundImage = 'url(' + link.bg + ')';
-      // }
     }
   }
 

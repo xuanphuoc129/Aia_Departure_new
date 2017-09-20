@@ -1,20 +1,37 @@
 page-departure-more {
     $heightheader: 56px;
     $background: linear-gradient(to right, #17cce9, #34a1ca);
-    .a-header {
+    .a-header-background {
         background: $background;
-        .a-header-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 5px;
+    }
+    .a-header-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+    .a-header-button {
+        img {
+            height: 3em;
         }
-        .a-header-button {
-            img {
-                height: $heightheader;
-                padding: 5px;
-            }
-        }
+    }
+    .a-center-center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .a-right-center {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 16px;
+    }
+    .a-left-center {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 16px;
     }
     .height-56 {
         height: $heightheader;

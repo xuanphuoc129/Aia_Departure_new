@@ -17,7 +17,7 @@ import { HttpModule } from "@angular/http";
 @NgModule({
   declarations: [
     MyApp,
-    DepartureTabsPage
+    DepartureTabsPage,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,7 @@ import { HttpModule } from "@angular/http";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    DepartureTabsPage
+    DepartureTabsPage,
     
   ],
   providers: [

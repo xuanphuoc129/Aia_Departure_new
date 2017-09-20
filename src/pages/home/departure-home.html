@@ -6,10 +6,10 @@
                 <div id="cube" class="panels-backface-invisible">
                     <div class="a1-container-absolute front">
                         <div class="a3-container a3-justify-center a3-column a1-fill-parent">
-                            <div class="a-cube-day font-shadow">
+                            <div class="a-cube-day">
                                 {{day_of_week}}
                             </div>
-                            <div class="a-cube-date font-shadow">
+                            <div class="a-cube-date">
                                 {{solarDate}}
                             </div>
                         </div>
@@ -17,10 +17,10 @@
                     <div class="a1-container-absolute back">
                         <div class="contentback">
                             <div class="a3-container a3-justify-center a3-column a1-fill-parent">
-                                <div class="a-cube-day font-shadow">
+                                <div class="a-cube-day">
                                     {{day_of_week}}
                                 </div>
-                                <div class="a-cube-date font-shadow">
+                                <div class="a-cube-date">
                                     {{solarDate}}
                                 </div>
                             </div>
@@ -28,20 +28,20 @@
                     </div>
                     <div class="a1-container-absolute right">
                         <div class="a3-container a3-justify-center a3-column a1-fill-parent">
-                            <div class="a-cube-day font-shadow">
+                            <div class="a-cube-day">
                                 {{day_of_week}}
                             </div>
-                            <div class="a-cube-date font-shadow">
+                            <div class="a-cube-date">
                                 {{solarDate}}
                             </div>
                         </div>
                     </div>
                     <div class="a1-container-absolute left">
                         <div class="a3-container a3-justify-center a3-column a1-fill-parent">
-                            <div class="a-cube-day font-shadow">
+                            <div class="a-cube-day">
                                 {{day_of_week}}
                             </div>
-                            <div class="a-cube-date font-shadow">
+                            <div class="a-cube-date">
                                 {{solarDate}}
                             </div>
                         </div>
@@ -56,15 +56,14 @@
             <q>{{quote_of_date}}</q>
         </div>
 
-        <div class="a-footer a3-container-center ">
+        <div padding-bottom *ngIf="!isLoading" class="a-footer a3-container-center ">
 
             <div class="a-footer-item a1-relative">
                 <div class="a1-text-center a-title">Giờ</div>
                 <div class="a-row-dot">
-                    <div class="line"></div>
-                    <div class="dot-large" style="background-color: #4dffa6">
-                        <div class="dot-small" style="background-color: #00cc66"></div>
-                    </div>
+                    <div class="line a-center"></div>
+                    <div class="dot-large a-center" style="background-color:#26cea5 "></div>
+                    <div class="dot-small a-center" style="background-color:#26cea5"></div>
                 </div>
                 <div text-center class="a1-container">
                     <div class="a1-height-30 a3-container-center a-footer-detail">{{nowtime | date: "HH:mm"}}</div>
@@ -75,10 +74,9 @@
             <div class="a-footer-item a1-relative">
                 <div class="a1-text-center a-title">Ngày</div>
                 <div class="a-row-dot">
-                    <div class="line"></div>
-                    <div class="dot-large" style="background-color: #ffffb3">
-                        <div class="dot-small" style="background-color:  #e6e600"></div>
-                    </div>
+                    <div class="line a-center"></div>
+                    <div class="dot-large a-center" style="background-color: #fbd025"></div>
+                    <div class="dot-small a-center" style="background-color:  #fbd025"></div>
                 </div>
                 <div text-center class="a1-container ">
                     <div class="a1-height-30 a3-container-center a-footer-detail">{{lunarDate}}</div>
@@ -89,10 +87,10 @@
             <div class="a-footer-item a1-relative">
                 <div class="a1-text-center a-title">Tháng</div>
                 <div class="a-row-dot">
-                    <div class="line"></div>
-                    <div class="dot-large" style="background-color: #ff80d5">
-                        <div class="dot-small" style="background-color: #e60099"></div>
-                    </div>
+                    <div class="line a-center"></div>
+                    <div class="dot-large a-center" style="background-color: #ef679c"></div>
+                    <div class="dot-small a-center" style="background-color: #ef679c"></div>
+
                 </div>
                 <div text-center class="a1-container ">
                     <div class="a1-height-30 a3-container-center a-footer-detail">{{lunarMonth}}</div>
@@ -103,10 +101,9 @@
             <div class="a-footer-item a1-relative">
                 <div class="a1-text-center a-title">Năm</div>
                 <div class="a-row-dot">
-                    <div class="line"></div>
-                    <div class="dot-large" style="background-color: #ffcc99">
-                        <div class="dot-small" style="background-color:  #ff8000"></div>
-                    </div>
+                    <div class="line a-center"></div>
+                    <div class="dot-large a-center" style="background-color: #fc882a"></div>
+                    <div class="dot-small a-center" style="background-color:  #fc882a"></div>
                 </div>
 
                 <div text-center class="a1-container ">
@@ -117,12 +114,15 @@
         </div>
     </div>
 </ion-content>
-<div padding-top class="a1-container-top a1-z-10">
+<div class="a1-container-top a1-z-10">
+    <div *ngIf="isPlatform == 'iphone'" style="height:20px;"></div>
+    <div *ngIf="isPlatform != 'iphone'" style="height:4px;"></div>
+
     <div class="height-56 a3-container a3-justify-between a3-items-center">
         <div margin-left class="a3-container a-header-button" (tap)="pickSolarDate()">
             <img src="assets/departure/btn_calendar.png">
         </div>
-        <div class="a-header-title" (tap)="pickSolarDate()">
+        <div class="a-header-title" nowrap>
             <div text-center>
                 <ion-icon margin-right ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
                 Tháng {{solarMonth}}/{{solarYear}}

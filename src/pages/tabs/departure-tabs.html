@@ -1,7 +1,6 @@
-<ion-tabs>
+<ion-tabs (ionChange)="onTabChanged()" #myTabs selectedIndex="0">
     <ion-tab [root]="tab1Root" tabIcon="day" [rootParams]="tab1Params"></ion-tab>
     <ion-tab [root]="tab2Root" tabIcon="month" [rootParams]="params"></ion-tab>
     <ion-tab [root]="tab3Root" tabIcon="exchange" [rootParams]="params"></ion-tab>
-    <!-- <ion-tab [root]="tab4Root" tabTitle="Tử Vi" tabIcon="horoscope" [rootParams] ="params"></ion-tab> -->
-    <ion-tab [root]="tab5Root" tabIcon="more" [rootParams]="params"></ion-tab>
+    <ion-tab [root]="tab4Root" tabIcon="mores" [rootParams]="params"></ion-tab>
 </ion-tabs>

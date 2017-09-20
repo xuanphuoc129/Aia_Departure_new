@@ -16,13 +16,6 @@
     padding: 0px !important;
 }
 
-.footer-md::before,
-.tabs-md[tabsPlacement="bottom"]>.tabbar::before {
-    top: 0px;
-    bottom: 0px;
-    height: 0;
-}
-
 $appcolor: #42337e;
 $toolbar-height: 56px;
 $statusbar-height: 20px;

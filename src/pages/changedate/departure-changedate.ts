@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { DepartureModule } from '../../providers/departure/departure';
 import { DepartureExchangeDay } from '../../providers/departure/departure-exchangeday';
 import { Departure } from '../../providers/departure/class/departure';
@@ -22,7 +22,7 @@ export class DayFilter {
 })
 
 export class DepartureChangeDatePage {
-  rowHeight = 56;//height of each row in px; Match to css; 
+  rowHeight = 50;//height of each row in px; Match to css; 
   timeoutObjects = [];
   touchingObjects = [];
   animationFrameObjects = [];
@@ -38,13 +38,16 @@ export class DepartureChangeDatePage {
   lunar_date = [];
   day_filter = new Array<DayFilter>();
   load_filter: boolean = true;
-
+  isPlatform;
   public selectedDate: Departure;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
     private mDepartureModule: DepartureModule,
+    private platform : Platform
   ) {
+    this.isPlatform = this.platform._platforms[2];
+    console.log(this.isPlatform);
     for (let i = 1; i <= 31; i++) {
       this.datas[0].push(i);
     }
@@ -80,21 +83,26 @@ export class DepartureChangeDatePage {
         scrollElm.addEventListener('scroll', (event) => {
           if (!this.touchingObjects[index]) {
             this.scrollEnd(scrollElm, index);
-            this.changeDate(index);
           }
         })
         scrollElm.addEventListener('touchstart', () => {
+          console.log("start");
+          
           this.touchingObjects[index] = true;
           this.currentIndex = index;
           
         })
         scrollElm.addEventListener('touchend', () => {
+          console.log("end");
+          
           this.touchingObjects[index] = false;
           this.scrollEnd(scrollElm, index);
-          this.changeDate(index);
+          // this.changeDate(index);
           
         })
         scrollElm.addEventListener('touchcancel', () => {
+          console.log("cancel");
+          
           this.touchingObjects[index] = false;
           this.scrollEnd(scrollElm, index);
           this.changeDate(index);
@@ -133,6 +141,8 @@ export class DepartureChangeDatePage {
   }
 
   changeDate(index: number) {
+    console.log("change date");
+    
     let solarElms = document.getElementsByClassName('solar-col');
     // console.log(solarElms);
     let lunarElms = document.getElementsByClassName('lunar-col');
@@ -161,7 +171,7 @@ export class DepartureChangeDatePage {
             this.scrollToTop(lunarElm, (this.lunar_date[index % 3] - this.datas[index % 3][0]) * this.rowHeight, index);
           }
           this.selectedDate = new Departure(new Date(this.solar_date[2] + "-" + this.solar_date[1] + "-" + this.solar_date[0]));
-          console.log(this.selectedDate);
+          // console.log(this.selectedDate);
           this.mDepartureModule.updateDepartureInfo([this.selectedDate]);
           
         }
@@ -183,12 +193,12 @@ export class DepartureChangeDatePage {
           this.day_filter = [];
           this.day_filter.push(new DayFilter(this.solar_date[0], this.solar_date[1], this.solar_date[2]));
           this.day_filter.push(new DayFilter(this.lunar_date[0], this.lunar_date[1], this.lunar_date[2]));
-          //show result 
+          // show result 
           for (let i = 0; i < solarElms.length; i++) {
             let solarElm = <HTMLElement>solarElms[i];
             let index = parseInt(solarElm.getAttribute('index'));
             this.scrollToTop(solarElm, (this.solar_date[index % 3] - this.datas[index % 3][0]) * this.rowHeight, index);
-          }
+          } 
           this.selectedDate = new Departure(new Date(this.solar_date[2] + "-" + this.solar_date[1] + "-" + this.solar_date[0]));
           this.mDepartureModule.updateDepartureInfo([this.selectedDate]);
           
@@ -198,13 +208,17 @@ export class DepartureChangeDatePage {
 
   }
 
-  scrollToTop(element: HTMLElement, scrollTop, index) {
 
-    let deltaDistance = 10 //in px;
+  scrollToTop(element: HTMLElement, scrollTop, index) {
+    
+    let deltaDistance = 15 //in px;
     let nowScrollTop = element.scrollTop;
     if (this.animationFrameObjects[index]) cancelAnimationFrame(this.animationFrameObjects[index]);
     if (Math.abs(nowScrollTop - scrollTop) <= deltaDistance) {
       element.scrollTop = scrollTop;
+      if( ((nowScrollTop-scrollTop==0)||(nowScrollTop- scrollTop)%50  ==0) && this.currentIndex == index){
+        this.changeDate(index);
+      }
       return;
     }
     if (deltaDistance * this.fps < Math.abs(nowScrollTop - scrollTop)) deltaDistance = Math.round(Math.abs(nowScrollTop - scrollTop) / this.fps);
@@ -219,13 +233,14 @@ export class DepartureChangeDatePage {
     //end of touch. May be end of scrolling. Just reset timeout. 
     //Scroll event fire about every 30ms so 100ms timeout is fine
     if (this.currentIndex == index) {
+      
       if (this.timeoutObjects[index]) clearTimeout(this.timeoutObjects[index]);
+      
       if (this.animationFrameObjects[index]) cancelAnimationFrame(this.animationFrameObjects[index]);
       this.timeoutObjects[index] = setTimeout(() => {
-        console.log("scroll end")
         let scrollTop = scrollElm.scrollTop;
         this.scrollToTop(scrollElm, Math.round(scrollTop / this.rowHeight) * this.rowHeight, index);
-      }, 100)
+      }, 10)
     }
 
   }

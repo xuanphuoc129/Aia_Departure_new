@@ -21,7 +21,7 @@ export const BACKGROUND = [
     }
     ,{
         bg:  "./assets/departure/background/bg_6.png",
-        fg: "#7453f",
+        fg: "#7453f7",
     }
     ,{ 
         bg:  "./assets/departure/background/bg_7.png",

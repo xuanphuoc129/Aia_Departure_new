@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { DepartureModule } from '../../providers/departure/departure';
 
 
@@ -10,11 +10,15 @@ import { DepartureModule } from '../../providers/departure/departure';
 })
 export class DepartureMorePage {
   more_options = [];
+  isPlatform;
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
     private mDepartureModule: DepartureModule,
+    private platform : Platform
   ) {
+    this.isPlatform = this.platform._platforms[2];
+    console.log(this.isPlatform);
     this.more_options = this.mDepartureModule.getOptions();
   }
 

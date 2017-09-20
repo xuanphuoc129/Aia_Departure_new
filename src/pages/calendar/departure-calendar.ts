@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
 import { DepartureModule } from '../../providers/departure/departure';
 import { Departure } from '../../providers/departure/class/departure';
 import { AppController } from '../../providers/app-controller';
@@ -22,19 +22,22 @@ export class DepartureCalendarPage {
   //dữ liệu về ngày xuất hành
   departureData: any;
   showDatePicker = false;
+  isPlatform;
 
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
     private mDepartureModule: DepartureModule,
-    private datePicker: DatePicker
+    private datePicker: DatePicker,
+    private platform : Platform
   ) {
+    this.isPlatform = this.platform._platforms[2];
+    console.log(this.isPlatform);
     this.currentDate = new Departure(new Date());
     this.selectedDate = new Departure(new Date());
     this.calendar = new Calendar(this.currentDate.date.getMonth(), this.currentDate.date.getFullYear());
     this.checkDepartureBlank();
     // this.calendar = this.calendar.
-    console.log("calendar", this.calendar, this.selectedDate, this.currentDate);
     if (!this.departureData) {
       this.mDepartureModule.getData().then(
         data => {

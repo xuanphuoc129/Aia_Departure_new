@@ -1,18 +1,21 @@
-<div class="a-header a1-container-top a1-z-10">
-    <div style="height:20px"></div>
+<div class="a-header-background a1-container-top a1-z-10" style="padding-bottom:4px">
+    <!-- <div style="height: 20px"></div> -->
+    <div *ngIf="isPlatform == 'iphone'" style="height:20px"></div>
+    <div *ngIf="isPlatform != 'iphone'" style="height:4px"></div>
 
-    <div class="height-56 a3-container-center">
-        <div class="a-header-title">
+    <div class="height-56">
+        <div class="a-header-title  a-center-center">
             Mở rộng
         </div>
-        <div margin-right class="a1-absolute  a1-right a-header-button">
+        <div class="a-header-button a-right-center">
             <img src="assets/departure/icon/btn_setting.png">
         </div>
     </div>
-    <div style="height:20px"></div>
 </div>
 <ion-content>
-    <div style="height:96px"></div>
+    <div *ngIf="isPlatform == 'iphone'" style="height:80px"></div>
+    <div *ngIf="isPlatform != 'iphone'" style="height:64px"></div>
+    <!-- <div style="height:20px"></div> -->
     <div padding-left padding-right class="body-content a1-relative">
         <div text-left margin-top margin-bottom>Đăng nhập với tài khoản</div>
         <div class="a3-container">

@@ -10,17 +10,16 @@ page-departure-changedate {
     }
     $heiderHeight: 60px;
     $titleHeight: 30px;
-    $rowHeight: 56px;
+    $rowHeight: 50px;
     $background: linear-gradient(to right, #17cce9, #34a1ca);
     .height-56 {
-        height: $rowHeight;
+        height: 56px;
     }
-    .a-header {
+    .a-header-background {
         background: $background;
     }
     .today {
-        height: $heiderHeight/2;
-        font-size: .7em;
+        font-size: .9em;
         color: #FFF;
         border: solid 1px #FFF;
         border-radius: 10px;
@@ -30,21 +29,35 @@ page-departure-changedate {
         white-space: nowrap;
     }
     .date-today {
-        font-size: .8em;
+        font-size: 1em;
     }
     .a-header-button {
-        // padding: 0.6em;
-        padding: 0.5em;
-        border-radius: 50%;
-        border: 1px solid white;
-    }
-    .a-header-button img {
-        height: 1.5em;
+        img {
+            height: 3em;
+        }
     }
     .a-header-title {
-        font-size: 5vw;
         text-align: center;
         color: white;
+        white-space: nowrap;
+    }
+    .a-center-center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .a-right-center {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 16px;
+    }
+    .a-left-center {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 16px;
     }
     .width-40 {
         width: 40%;
@@ -65,10 +78,11 @@ page-departure-changedate {
             height: $rowHeight * 3;
             .bg-active {
                 position: absolute;
-                top: $rowHeight;
+                top: 50%;
                 left: 0;
                 width: 100%;
-                height: $rowHeight;
+                transform: translateY(-50%);
+                height: 30px;
                 z-index: -1;
                 background: #f2f2f2;
                 border-radius: 20px;
@@ -89,7 +103,7 @@ page-departure-changedate {
                 .item {
                     width: 100%;
                     height: $rowHeight;
-                    color: #a6a6a6;
+                    color: #717171;
                     text-align: center;
                     span {
                         display: block;
@@ -98,19 +112,19 @@ page-departure-changedate {
                         height: $rowHeight;
                         line-height: $rowHeight;
                         white-space: nowrap;
-                        font-size: 1.3em;
+                        font-size: 1em;
                     }
                 }
                 .day-active {
-                    color: #e6e600;
+                    color: #fbd025;
                     font-weight: bold;
                 }
                 .month-active {
-                    color: #ff1a8c;
+                    color: #ef679c;
                     font-weight: bold;
                 }
                 .year-active {
-                    color: #ff9933;
+                    color: #fc882a;
                     font-weight: bold;
                 }
             }
@@ -140,7 +154,7 @@ page-departure-changedate {
             margin-bottom: 10px;
             font-size: 1.2em;
             color: #34a1ca;
-            white-space: 5px;
+            white-space: nowrap;
         }
         .day-comment {
             font-size: 1em;
