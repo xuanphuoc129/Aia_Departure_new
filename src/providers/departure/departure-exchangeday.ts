@@ -343,70 +343,71 @@ export class DepartureExchangeDay {
         let chi: string;
         let result: string;
         let N: number = parseInt(this.jdFromDate(date, month, year).toString());
-        if (parseInt(((N + 9.5) % 10).toString()) == 0) {
+        
+        if (parseInt(((N + 9) % 10).toString()) == 0) {
             can = "Giáp"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 1) {
+        if (parseInt(((N + 9) % 10).toString()) == 1) {
             can = "Ất"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 2) {
+        if (parseInt(((N + 9) % 10).toString()) == 2) {
             can = "Bính"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 3) {
+        if (parseInt(((N + 9) % 10).toString()) == 3) {
             can = "Đinh"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 4) {
+        if (parseInt(((N + 9) % 10).toString()) == 4) {
             can = "Mậu"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 5) {
+        if (parseInt(((N + 9) % 10).toString()) == 5) {
             can = "Kỷ"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 6) {
+        if (parseInt(((N + 9) % 10).toString()) == 6) {
             can = "Canh"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 7) {
+        if (parseInt(((N + 9) % 10).toString()) == 7) {
             can = "Tân"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 8) {
+        if (parseInt(((N + 9) % 10).toString()) == 8) {
             can = "Nhâm"
         }
-        if (parseInt(((N + 9.5) % 10).toString()) == 9) {
+        if (parseInt(((N + 9) % 10).toString()) == 9) {
             can = "Quý"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 0) {
+        if (parseInt(((N + 1) % 12).toString()) == 0) {
             chi = "Tý"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 1) {
+        if (parseInt(((N + 1) % 12).toString()) == 1) {
             chi = "Sửu"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 2) {
+        if (parseInt(((N + 1) % 12).toString()) == 2) {
             chi = "Dần"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 3) {
+        if (parseInt(((N + 1) % 12).toString()) == 3) {
             chi = "Mão"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 4) {
+        if (parseInt(((N + 1) % 12).toString()) == 4) {
             chi = "Thìn"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 5) {
+        if (parseInt(((N + 1) % 12).toString()) == 5) {
             chi = "Tỵ"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 6) {
+        if (parseInt(((N + 1) % 12).toString()) == 6) {
             chi = "Ngọ"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 7) {
+        if (parseInt(((N + 1) % 12).toString()) == 7) {
             chi = "Mùi"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 8) {
+        if (parseInt(((N + 1) % 12).toString()) == 8) {
             chi = "Thân"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 9) {
+        if (parseInt(((N + 1) % 12).toString()) == 9) {
             chi = "Dậu"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 10) {
+        if (parseInt(((N + 1) % 12).toString()) == 10) {
             chi = "Tuất"
         }
-        if (parseInt(((N + 1.5) % 12).toString()) == 11) {
+        if (parseInt(((N + 1) % 12).toString()) == 11) {
             chi = "Hợi"
         }
 
@@ -443,7 +444,7 @@ export class DepartureExchangeDay {
         if (lunarmonth == 3 || lunarmonth == 9) {
             if (chi == "Thìn" || chi == "Tỵ" || chi == "Dậu" || chi == "Hợi") {
                 return 1;
-            } else if (chi == "Tuất" || chi == "Mùi" || chi == "Hợi" || chi == "Sửu") {
+            } else if (chi == "Tuất" || chi == "Mùi" || chi == "Mão" || chi == "Sửu") {
                 return 2;
             } else {
                 return 0;
@@ -451,7 +452,7 @@ export class DepartureExchangeDay {
         }
 
         if (lunarmonth == 4 || lunarmonth == 10) {
-            if (chi == "Ngọ" || chi == "Sửu" || chi == "Dậu" || chi == "Mùi") {
+            if (chi == "Ngọ" || chi == "Sửu" || chi == "Hợi" || chi == "Mùi") {
                 return 1;
             } else if (chi == "Tý" || chi == "Dậu" || chi == "Tỵ" || chi == "Mão") {
                 return 2;
@@ -485,7 +486,7 @@ export class DepartureExchangeDay {
     getCanDay(date: any, month: any, year: any) {
         let result: string;
         let N: number = parseInt(this.jdFromDate(date, month, year).toString());
-        let tempCalculation: number = parseInt(((N + 9.5) % 10).toString());
+        let tempCalculation: number = parseInt(((N + 9) % 10).toString());
         switch (tempCalculation) {
             case 0:
                 result = "Giáp";

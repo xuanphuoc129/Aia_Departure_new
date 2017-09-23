@@ -32,7 +32,7 @@
                 <div class="bg-active"></div>
                 <div class="change-date-col solar-col" index="0">
                     <div class="item"></div>
-                    <div class="item " *ngFor="let date of datas[0]" [class.day-active]="!load_filter && date== day_filter[0].day"><span>{{date}}</span>
+                    <div class="item " *ngFor="let date of day_in_month" [class.day-active]="!load_filter && date== day_filter[0].day"><span>{{date}}</span>
                     </div>
                     <div class="item"></div>
                 </div>
@@ -86,7 +86,7 @@
         <div class="date-detail a3-container-center" nowrap>Chi tiết ngày</div>
     </div>
     <div class="zodiac-comment">
-        <span class="day-name">{{selectedDate.nameOfDay}} - {{selectedDate.dateString}} </span>
+        <span class="day-name">Ngày {{selectedDate.nameOfDay}} - {{selectedDate.dateString}} </span>
         <span class="day-comment" *ngIf="selectedDate.comment">" {{selectedDate.comment}} "</span>
     </div>
 </ion-content>

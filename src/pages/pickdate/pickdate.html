@@ -1,0 +1,31 @@
+<ion-content>
+    <div class="a1-relative">
+        <div margin-bottom class="change-date-content">
+            <div class="change-date-header a3-container-center">
+                <div class="title">Chọn ngày</div>
+                <div class="close-button" (click)="closeSolarDate()">x</div>
+            </div>
+            <div class="change-date-col-container">
+                <div class="bg-active"></div>
+                <div class="change-date-col solar-col" index="0">
+                    <div class="item"></div>
+                    <div class="item " *ngFor="let date of day_in_month"><span>{{date}}</span></div>
+                    <div class="item"></div>
+                </div>
+                <div class="change-date-col solar-col" index="1">
+                    <div class="item"></div>
+                    <div class="item" *ngFor="let month of datas[1]"><span>{{month}}</span></div>
+                    <div class="item"></div>
+                </div>
+                <div class="change-date-col solar-col" index="2">
+                    <div class="item"></div>
+                    <div class="item" *ngFor="let year of datas[2]"><span>{{year}}</span></div>
+                    <div class="item"></div>
+                </div>
+            </div>
+        </div>
+        <div class="button-bottom" (click)="getSolarDate() ">Đồng ý</div>
+
+    </div>
+
+</ion-content>

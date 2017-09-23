@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,Platform } from 'ionic-angular';
+import { Component,ViewChild,Renderer2,ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams,Platform,ModalController } from 'ionic-angular';
 import { DepartureModule } from '../../providers/departure/departure';
 import { Departure } from '../../providers/departure/class/departure';
 import { AppController } from '../../providers/app-controller';
@@ -12,6 +12,7 @@ import { DatePicker } from '@ionic-native/date-picker';
   templateUrl: 'departure-calendar.html',
 })
 export class DepartureCalendarPage {
+  @ViewChild('calendarContent') calendar_content: ElementRef;
   public departureDays: Array<Departure> = [];
   public dayOfWeek = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
   calendar: Calendar;
@@ -23,18 +24,19 @@ export class DepartureCalendarPage {
   departureData: any;
   showDatePicker = false;
   isPlatform;
-
   constructor(
     private navParams: NavParams,
     private navCtrl: NavController,
     private mDepartureModule: DepartureModule,
     private datePicker: DatePicker,
-    private platform : Platform
+    private platform : Platform,
+    private modalCtrl : ModalController,
+    private rd : Renderer2
   ) {
     this.isPlatform = this.platform._platforms[2];
-    console.log(this.isPlatform);
     this.currentDate = new Departure(new Date());
     this.selectedDate = new Departure(new Date());
+   
     this.calendar = new Calendar(this.currentDate.date.getMonth(), this.currentDate.date.getFullYear());
     this.checkDepartureBlank();
     // this.calendar = this.calendar.
@@ -47,8 +49,16 @@ export class DepartureCalendarPage {
     }
     this.mDepartureModule.updateDepartureInfo(this.calendar.days);
     this.mDepartureModule.updateDepartureInfo([this.currentDate, this.selectedDate]);
+   
     // this.getQuoteAndDayName(this.selectedDate);
   }
+  // loadData(){
+  
+  // }
+  // ionViewDidEnter(){
+  //   this.loadData()
+  // }
+  
   checkDepartureBlank(){
       if(this.calendar.days[35]){
         this.departureDays=this.calendar.days;
@@ -59,6 +69,7 @@ export class DepartureCalendarPage {
   //Load data
   onInputChange(month, year) {
     this.calendar.setTime(month, year);
+    
     this.checkDepartureBlank();
     this.mDepartureModule.updateDepartureInfo(this.departureDays);
   }
@@ -82,6 +93,12 @@ export class DepartureCalendarPage {
         month = 0;
         year++;
       }
+      
+      this.rd.addClass(this.calendar_content.nativeElement,'slideInRight');
+      setTimeout(()=> {
+        this.rd.removeClass(this.calendar_content.nativeElement,'slideInRight');
+      }, 1000);
+      // this.rd.removeClass(this.calendar_content.nativeElement,'fadeInRight');
       this.onInputChange(month, year);
     }
     if (direction == 4) {
@@ -91,18 +108,36 @@ export class DepartureCalendarPage {
         month = 11;
         year--;
       }
+      this.rd.addClass(this.calendar_content.nativeElement,'slideInLeft');
+      setTimeout(()=> {
+        this.rd.removeClass(this.calendar_content.nativeElement,'slideInLeft');
+      }, 1000);
+      // 
+      
       this.onInputChange(month, year);
     }
   }
 
-  selectDeparture(departure, i) {
+  selectDeparture(departure) {
     if (departure)
       this.selectedDate = departure;
   }
-
-  pickSolarDate(event) {
-    this.showDatePicker = true;
-    event.stopPropagation();
+ 
+  pickSolarDate() {
+    let modal = this.modalCtrl.create("PickdatePage");
+    modal.onDidDismiss((data : Departure)=>{
+      if(data){
+        setTimeout(() =>{
+        this.selectedDate = data;
+        let month = this.selectedDate.date.getMonth();
+        let year  = this.selectedDate.date.getFullYear();
+        this.onInputChange(month,year);
+        }, 100);
+      }
+    })
+    modal.present({
+      animate: false
+    });
   }
   hideDatePicker(event) {
     this.showDatePicker = false;

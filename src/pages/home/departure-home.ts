@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, MenuController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, MenuController, Platform,ModalController } from 'ionic-angular';
 import { DatePicker } from '@ionic-native/date-picker';
 import { AppController } from '../../providers/app-controller';
 import { DepartureModule } from '../../providers/departure/departure';
+import { Departure } from "../../providers/departure/class/departure";
 
 
 @IonicPage()
@@ -62,7 +63,8 @@ export class DepartureHomePage {
     private mDepartureModule: DepartureModule,
     private mMenuController: MenuController,
     private datePicker: DatePicker,
-    private platform : Platform
+    private platform : Platform,
+    private modalCtrl: ModalController
   ) {
     this.isPlatform = this.platform._platforms[2];
     console.log(this.isPlatform);
@@ -279,21 +281,21 @@ export class DepartureHomePage {
 
   //chọn ngày bất kỳ
   pickSolarDate() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date'
-    }).then(
-      date => {
-        this.solarDate = date.getDate();
-        this.solarMonth = date.getMonth() + 1;
-        this.solarYear = date.getFullYear();
-        // this.changeBackgroundImage();
+    let modal = this.modalCtrl.create("PickdatePage");
+    modal.onDidDismiss((data:Departure)=>{
+      if(data){
+        this.solarDate = data.date.getDate();
+        this.solarMonth = data.date.getMonth() + 1;
+        this.solarYear = data.date.getFullYear();
+        this.changeBackgroundImage();
         this.getDayOfWeek();
         this.getLunarDateTime();
         this.getQuoteAndDayName();
         this.getSexagesimalCycle();
-      },
-      err => console.log('Error occurred while getting date: ', err)
-      );
+      }
+    })
+    modal.present({
+      animate: false
+    })
   }
 }

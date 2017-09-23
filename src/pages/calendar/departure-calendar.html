@@ -3,7 +3,7 @@
     <div *ngIf="isPlatform == 'iphone'" style="height: 20px;"></div>
     <div *ngIf="isPlatform != 'iphone'" style="height: 4px"></div>
     <div class="height-56 a3-container a3-justify-between a3-items-center">
-        <div margin-left class="a3-container a-header-button" (click)="pickSolarDate($event)">
+        <div margin-left class="a3-container a-header-button" (click)="pickSolarDate()">
             <img src="assets/departure/btn_calendar.png">
         </div>
         <div class="a-header-title" nowrap>
@@ -18,19 +18,20 @@
             <img src="assets/departure/btn_notification.png">
         </div>
     </div>
+    <ion-row class="calendar-th">
+        <ion-col *ngFor="let day of dayOfWeek"><span nowrap>{{day}}</span></ion-col>
+    </ion-row>
 </div>
 <ion-content no-bounce>
     <div class="dp-content">
         <div *ngIf="isPlatform == 'iphone'" style="height: 75px;"></div>
         <div *ngIf="isPlatform != 'iphone'" style="height: 59px"></div>
+        <div style="height: 20px"></div>
         <ion-grid class="calendar-block" (swipe)="swipe($event)">
-            <ion-row class="calendar-th">
-                <ion-col *ngFor="let day of dayOfWeek"><span nowrap>{{day}}</span></ion-col>
-            </ion-row>
-            <ion-row margin-top class="calendar-day">
+            <ion-row #calendarContent margin-top class="calendar-day animated">
                 <ion-col (tap)="selectDeparture(departure)" *ngFor="let departure of departureDays; let i = index">
                     <div *ngIf="departure" text-center class="day-box" [class.date-today]="departure && departure.dateString == currentDate.dateString">
-                        <div class="solar-date " [class.color-sunday]="i==0 || i%7==0" [class.color-saturday]="(i+1)%7==0">{{getDate(departure.date)}}</div>
+                        <div class="solar-date " [class.color-sunday]="i==0 || i%7==0" [class.color-saturday]="i%7==6" [class.color-default]="i%7==1 || i%7==2 || i%7==3 || i%7==4 || i%7==5">{{getDate(departure.date)}}</div>
                         <div class="a3-container-center" nowrap>
                             <span class="status-day status-{{departure.zodiacStatus}}"></span>
                             <span class="lunar-date" *ngIf="departure.lunarDate != 1">{{departure.lunarDate}}  </span>
@@ -41,7 +42,7 @@
                 </ion-col>
             </ion-row>
         </ion-grid>
-        <div class="zodiac-block" nowrap>
+        <div class="zodiac-block">
             <div class="positive" nowrap>
                 <span class="status status-zodiac status-1"></span>
                 <span nowrap>Hoàng Đạo</span>
@@ -52,38 +53,32 @@
             </div>
         </div>
         <div class="zodiac-comment">
-            <span class="day-name" nowrap>{{selectedDate.nameOfDay}} </span>
+            <span class="day-name" nowrap>Ngày {{selectedDate.nameOfDay}} </span>
             <span class="day-comment" *ngIf="selectedDate.comment">" {{selectedDate.comment}} "</span>
         </div>
     </div>
 
 </ion-content>
 
-<!-- <div class="month-picker" id="month-picker1" *ngIf="showDatePicker">
-    <div class="month-picker-backdrop" (click)="hideDatePicker($event)"></div>
-    <div class="month-picker-content animated fadeIn">
-        <div class="year">
-            <span class="month-picker-button prev-button" (click)="prevYear()">
-                <i class="fa fa-caret-left" aria-hidden="true"></i>
-            </span>
-            <span>{{calendar.year}}</span>
-            <span class="month-picker-button next-button" (click)="nextYear()">
-                <i class="fa fa-caret-right" aria-hidden="true"></i>
-            </span>
+
+<!-- <div id="solar-date" class="content a3-container-center">
+    <div class="bg-active"></div>
+    <div class="change-date-col solar-col" index="0">
+        <div class="item"></div>
+        <div class="item " *ngFor="let date of datas[0]" [class.day-active]="!load_filter && date== day_filter[0].day"><span>{{date}}</span>
         </div>
-        <div class="month-group">
-            <div class="month" [class.bordered]="calendar.month == 0" (click)="changeMonth(1, $event)" value="1">1</div>
-            <div class="month" [class.bordered]="calendar.month == 1" (click)="changeMonth(2, $event)" value="2">2</div>
-            <div class="month" [class.bordered]="calendar.month == 2" (click)="changeMonth(3, $event)" value="3">3</div>
-            <div class="month" [class.bordered]="calendar.month == 3" (click)="changeMonth(4, $event)" value="4">4</div>
-            <div class="month" [class.bordered]="calendar.month == 4" (click)="changeMonth(5, $event)" value="5">5</div>
-            <div class="month" [class.bordered]="calendar.month == 5" (click)="changeMonth(6, $event)" value="6">6</div>
-            <div class="month" [class.bordered]="calendar.month == 6" (click)="changeMonth(7, $event)" value="7">7</div>
-            <div class="month" [class.bordered]="calendar.month == 7" (click)="changeMonth(8, $event)" value="8">8</div>
-            <div class="month" [class.bordered]="calendar.month == 8" (click)="changeMonth(9, $event)" value="9">9</div>
-            <div class="month" [class.bordered]="calendar.month == 9" (click)="changeMonth(10, $event)" value="10">10</div>
-            <div class="month" [class.bordered]="calendar.month == 10" (click)="changeMonth(11, $event)" value="11">11</div>
-            <div class="month" [class.bordered]="calendar.month == 11" (click)="changeMonth(12, $event)" value="12">12</div>
-        </div>
+        <div class="item"></div>
+    </div>
+    <div class="border"></div>
+    <div class="change-date-col solar-col" index="1">
+        <div class="item"></div>
+        <div class="item" *ngFor="let month of datas[1]" [class.month-active]="!load_filter && month==day_filter[0].month"><span>{{month}}</span></div>
+        <div class="item"></div>
+    </div>
+    <div class="border"></div>
+    <div class="change-date-col solar-col" index="2">
+        <div class="item"></div>
+        <div class="item" *ngFor="let year of datas[2]" [class.year-active]="!load_filter && year==day_filter[0].year"><span>{{year}}</span></div>
+        <div class="item"></div>
     </div>
 </div> -->

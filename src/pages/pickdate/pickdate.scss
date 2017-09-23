@@ -1,0 +1,100 @@
+page-pickdate {
+    $rowHeight: 45px;
+    .content-md {
+        background-color: rgba(black, 0.3);
+    }
+    // .content {
+    //     background-color: #fff;
+    //     width: 80%;
+    //     margin: auto;
+    // }
+    .container {}
+    .scroll-content {
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 0px !important;
+    }
+    .change-date-header {
+        height: $rowHeight;
+        background: linear-gradient(to right, #18cae6, #32a4cc);
+        position: relative;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .title {
+        padding: 16px;
+        color: #fff;
+    }
+    .close-button {
+        height: $rowHeight;
+        width: $rowHeight;
+        padding: 16px;
+        color: #fff;
+        background: rgba(white, 0.3);
+        position: absolute;
+        right: 0;
+        border-top-right-radius: 10px;
+    }
+    .change-date-col-container {
+        height: $rowHeight *3;
+        position: relative;
+        z-index: 9;
+        .bg-active {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: $rowHeight;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            background: #fad1e1;
+            border-radius: 20px;
+            opacity: 1;
+            z-index: 0;
+        }
+        .change-date-col {
+            position: relative;
+            width: 33%;
+            float: left;
+            overflow: auto;
+            height: $rowHeight *3;
+            z-index: 10;
+            .item {
+                width: 100%;
+                height: $rowHeight;
+                color: #717171;
+                text-align: center;
+                span {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                    height: $rowHeight;
+                    line-height: $rowHeight;
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+    .change-date-content {
+        height: $rowHeight *4;
+        position: relative;
+        margin: auto;
+        width: 80%;
+        border-radius: 10px;
+        background-color: #fff;
+    }
+    .button-bottom {
+        margin-top: 16px;
+        border-radius: 20px;
+        height: $rowHeight;
+        position: relative;
+        margin: auto;
+        width: 80%;
+        padding: 16px;
+        background-color: #56b8dd;
+        text-transform: uppercase;
+        color: #fff;
+    }
+}
